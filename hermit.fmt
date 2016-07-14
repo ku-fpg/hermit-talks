@@ -1,0 +1,85 @@
+\definecolor{haskell:keyword}{rgb}{0.7,0,0.7}
+\definecolor{haskell:constructor}{rgb}{0,0.5,0}
+\definecolor{haskell:comment}{rgb}{1,0,0}
+\definecolor{haskell:identifier}{rgb}{0,0,1}
+
+
+\newcommand{\constructor}[1]{{\color{haskell:constructor}\mathsf{#1}}}
+\newcommand{\keyword}[1]{{\color{haskell:keyword}\mathbf{#1}}}
+\newcommand{\identifier}[1]{{\color{haskell:identifier}\mathsf{#1}}}
+
+%format data   = "\keyword{data}"
+%format type   = "\keyword{type}"
+%format case   = "\keyword{case}"
+%format of     = "\keyword{of}"
+%format let    = "\keyword{let}"
+%format in     = "\keyword{in}"
+%format if     = "\keyword{if}"
+%format then   = "\keyword{then}"
+%format else   = "\keyword{else}"
+%format module = "\keyword{module}"
+%format where  = "\keyword{where}"
+%format forall = "\keyword{\forall} "
+
+%format period = "\keyword{\!.}"
+
+%format ; = "\;;"
+
+%nformat >>> = "\!\!>\!\!>\!\!>"
+%format >>> = "\ggg"
+%format <$> = "<\!\!\$\!\!>"
+%format <+> = "<\!\!\!+\!\!\!>"
+%nformat >+> = "\mathsmaller{>\!\!\!+\!\!\!>}"
+%format >+> = ">\!\!\!+\!\!\!>"
+%format <+  = "<\!\!\!+\;"
+%format @@  = "\;" @ "\!" @ "\;"
+
+%format Zero = "\constructor{Zero}"
+%format Succ = "\constructor{Succ}"
+
+%format Nothing = "\constructor{Nothing}"
+%format Just    = "\constructor{Just}"
+%format Left    = "\constructor{Left}"
+%format Right   = "\constructor{Right}"
+
+%format ContextCON    = "\constructor{Context}"
+%format HermitEnvCON  = "\constructor{HermitEnv}"
+%format HermitMCON    = "\constructor{HermitM}"
+%format ModGutsCON    = "\constructor{ModGuts}"
+%format VarCON        = "\constructor{Var}"
+%format TypeCON       = "\constructor{Type}"
+%format CoercionCON   = "\constructor{Coercion}"
+%format TranslateCON  = "\constructor{Translate}"
+
+
+%format SuccessR      = "\constructor{SuccessR}"
+%format FailR         = "\constructor{FailR}"
+
+%format NonRec        = "\constructor{NonRec}"
+%format Rec           = "\constructor{Rec}"
+
+%format Lit           = "\constructor{Lit}"
+%format App           = "\constructor{App}"
+%format Lam           = "\constructor{Lam}"
+%format Let           = "\constructor{Let}"
+%format Case          = "\constructor{Case}"
+%format Cast          = "\constructor{Cast}"
+%format Tick          = "\constructor{Tick}"
+
+%format DataAlt       = "\constructor{DataAlt}"
+%format LitAlt        = "\constructor{LitAlt}"
+%format DEFAULT       = "\constructor{DEFAULT}"
+
+%format ModGutsCore   = "\constructor{ModGutsCore}"
+%format ProgramCore   = "\constructor{ProgramCore}"
+%format BindCore      = "\constructor{BindCore}"
+%format ExprCore      = "\constructor{ExprCore}"
+%format AltCore       = "\constructor{AltCore}"
+
+%format Local         = "\constructor{Local}"
+%format Eval          = "\constructor{Eval}"
+
+%format KernelCON     = "\constructor{Kernel}"
+%format ASTCON        = "\constructor{AST}"
+
+%format InterpCON     = "\constructor{Interp}"

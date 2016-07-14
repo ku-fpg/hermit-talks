@@ -1,0 +1,67 @@
+\begin{frame}
+
+\frametitle{Highest Level Architecture}
+
+We draw inspiration from UNIX and operating systems.
+
+\frameskip{}
+
+{\LARGE Three levels}
+
+\frameskip{}
+
+\begin{itemize}
+\item Shell Level \dotfill{} (UNIX Shell style commands)
+
+\item Rewrite Level \dotfill{} (UNIX man(2) system commands)
+
+\item Stratego-style library for rewrites\dotfill(DSL for rewrites)
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Shell Level}
+
+
+UNIX Shell style commands
+\frameskip{}
+\begin{itemize}
+\item Dynamically typed, variable arguments
+\item Help (man) for each command
+\item Control flow commands (';', retry, etc.)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Rewrite Level}
+
+UNIX man(2) system commands
+\frameskip{}
+\begin{itemize}
+\item Haskell functions, strongly typed
+\item Think type $::$ {\tt CoreExpr} $\rightarrow$ {\tt M CoreExpr}
+\item Higher-order functions for tunneling into expressions
+\item Many function tunnel into GHC (example: substExpr)
+\item Allow, all GHC ``RULES'' are directly invokable.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Stratego style library for rewrites}
+
+\begin{itemize}
+\item Haskell DSL call KURE
+\item Basic idea: rewrites can succeed or fail
+\item Higher-order combinators for search, catching fail, retry
+\item Both levels reflect the Stratego API
+\end{itemize}
+
+\end{frame}
+

@@ -1,0 +1,207 @@
+%include frontMatter-gill.lhs.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[HERMIT]{Making a Century in HERMIT}
+%\subtitle{A Plugin for the Interactive Transformation\\ of GHC Core Language Programs}
+
+\author[Andrew Gill]{Neil Sculthorpe, Andrew Farmer, and Andrew Gill}
+
+
+\institute{Functional Programming Group\\
+           Information and Telecommunication Technology Center\\
+           University of Kansas}
+
+\date{2nd October 2014}
+
+\renewcommand{\section}[1]{}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-include fullemployment.tex
+%include spam.tex
+%include motivation.lhs.tex
+%include demo-fib.lhs.tex
+\begin{frame}[verbatim]
+
+{\Huge First Demo}
+
+\pause
+\begin{itemize}
+\item {resume}                    \dotfill{} resume the compile
+\item {\tt binding-of 'main}    \dotfill{} goto the {\tt main} definition
+\item {\tt binding-of 'fib} \dotfill{} goto the {\tt fib} definition
+\item {\tt remember "myfib"}    \dotfill{} remember a definition
+\item {\tt show-remembered}     \dotfill{} show what has been remembered
+\item {any-call (unfold-remembered "myfib")} \dotfill{} try unfold ``myfib''
+\item {\tt bash}                \dotfill{} bash a syntax tree with simple rewrites
+\item {\tt top}                 \dotfill{} go back to the top of the syntax tree
+\item {\tt load-and-run "Fib.hss"} \dotfill{} load and run a script
+\end{itemize}
+
+\end{frame}
+
+%include download.lhs.tex
+%include forTheSakeOfWhat.tex
+%include twoLevel.tex
+%include hermitProject.lhs.tex
+%include commands.lhs.tex
+
+%%include workerWrapper.tex
+%%include ww-demo.tex
+
+
+\begin{frame}
+
+\frametitle{Pearls of Functional Algorithm Design}
+
+\begin{centering}
+
+\includegraphics[width=1in]{Pictures/bird.pdf}
+
+\end{centering}
+
+\begin{itemize}
+\item The book is entirely dedicated to reasoning about Haskell programs, with each chapter calculating an efficient program from an inefficient specification program.
+\item We selected the chapter \emph{Making a Century} from the textbook \emph{Pearls of Functional Algorithm Design}.
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Larger Example: Deriving a better century}
+
+The program in \emph{Making a Century} computes the list of all arithmetic expressions formed from ascending digits, where juxtaposition, addition, and multiplication evaluate to 100.
+For example, one possible solution is
+\[
+100 = 12 + 34 + 5 \times 6 + 7 + 8 + 9
+\]
+
+The derivation of an efficient program involves a substantial amount of equational reasoning, and the use of a variety of proof
+techniques, including fold/unfold transformation, structural induction, fold fusion, and numerous auxiliary lemmas.
+
+\end{frame}
+
+\begin{frame}[verbatim]
+
+Fragment of the proof:
+
+\tiny
+\begin{verbatim}
+{ rhs-of 'solutions
+
+  -- filter (good . value) . expressions
+
+        { app-arg ; inline 'expressions }
+
+  -- filter (good . value) . foldr extend []
+
+        { [ app-fun, app-arg ] ; apply-rule "6.2" }
+        { lemma "comp-assoc" }
+
+  -- filter (good . value) . filter (ok . value) . foldr extend []
+
+        { app-arg
+
+          -- filter (ok . value) . foldr extend []
+
+              { lemma "foldr-fusion-1" }
+
+          -- foldr extend' []
+
+        }
+
+  -- filter (good . value) . foldr extend' []
+
+}
+\end{verbatim}
+
+
+\end{frame}
+
+
+%include rules.lhs.tex
+
+\begin{frame}[verbatim]
+\frametitle{What happened while deriving a better century}
+
+\begin{itemize}
+\item  During mechanization we discovered that several auxiliary properties in the textbook
+  are stated as assumptions without proof.
+\begin{itemize}
+\item we suspect that they are deemed either ``obvious'' or ``uninteresting''.
+\end{itemize}
+\item Assumption 6.2 also had a simple proof, but it relied on arithmetic properties of Haskell's built-in \verb|Int| type
+(specifically, that \verb|m == n| $\implies$ \verb|m <= n|).
+\item Two proof techniques are used in the textbook that HERMIT does not directly support.
+\begin{itemize}
+\item The first is the fold fusion law, which needs implication, which we do not support.
+\item The second involves postulating the existence of an auxiliary function.
+\item We did manage to run the postulated function backwards, to verify the calculation.
+\end{itemize}
+\item We have a plugin that provides the fold fusion law as a primitive.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Length of Calculations for Century}
+
+\renewcommand{\tabcolsep}{1ex}
+
+\begin{center}
+\begin{tabular}{||l||c||c||c||c||c||}
+\hline
+\multicolumn{1}{||c||}{\multirow{2}{*}{Calculation}}
+             &  Textbook        &  \multicolumn{3}{c||}{HERMIT Commands}\\
+\cline{3-5}
+             &  Lines           &  Transformation  &  Navigation  & Total \\
+\hline
+|solutions|  &  16              &  12              & ~7            & ~19 \\
+|expand|     &  19              &  18              & 20           & ~38 \\
+Lemma 6.5    &  not given       &  ~4               & ~4            & ~~8 \\
+Lemma 6.6    &  not given       &  ~2               & ~1            & ~~3 \\
+Lemma 6.7    &  not given       &  ~2               & ~0            & ~~2 \\
+Lemma 6.8    &  ~7               &  ~5               & ~8            & ~13 \\
+Lemma 6.9    &  ~1               &  ~4               & ~4            & ~~8 \\
+Lemma 6.10   &  not given       &  23              & 13           & ~36 \\
+Total        &  43              &  70              & 57           & 127 \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{HERMIT Summary}
+
+\begin{itemize}
+
+\item
+A GHC plugin for interactive transformation of GHC Core programs
+
+\item
+Can express basic equational reasoning as HERMIT scripts
+
+\item
+New and powerful commands can be defined using a HERMIT plugin mechanism
+
+\end{itemize}
+
+\center{\tt\Large cabal install hermit}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

@@ -1,0 +1,55 @@
+\begin{frame}[verbatim]
+\frametitle{GHC RULES}
+
+\begin{itemize}
+\item GHC language feature allowing custom optimisations
+\item e.g.
+{%format f = "\identifier{f}"
+%format g = "\identifier{g}"
+%format xs = "\identifier{xs}"
+{\color{haskell:comment}
+\begin{code}
+{-"\hspace{-10ex}"-} {-# RULES |"map/map" {-"{\color{black}\;"-} forall f g xs period  map f (map g xs) = map (f.g) xs|} #-}
+\end{code}
+}
+}
+\vspace{-3ex}
+%% \item directed (left to right)
+%% \item type checked
+\item HERMIT adds any RULES to its available transformations
+            \begin{itemize}
+               \item allows the HERMIT user to introduce new transformations
+               %% \item<6-> lightweight, but less powerful than encoding new rewrites using KURE
+               \item HERMIT can be used to test/debug RULES
+               \item We use the \verb|[~]| syntax to record, but not use, a rule.
+            \end{itemize}
+
+\end{itemize}
+
+%% \begin{itemize}
+%% \item<1-> GHC language feature
+%% \item<2-> allow custom optimisations to be given to GHC
+%% \item<3-> for example:
+%% {%format f = "{\color{blue}f}"
+%% %format g = "{\color{blue}g}"
+%% %format xs = "{\color{blue}xs}"
+%% {\color{haskell:comment}
+%% \begin{code}
+%% {-"\hspace{-5em}"-} {-# RULES |"map/map" {-"{\color{black}\;"-} forall f g xs period  map f (map g xs) = map (f.g) xs|} #-}
+%% \end{code}
+%% }
+%% }
+%% \vspace{-3ex}
+%% \item<4-> directed (left to right)
+%% \item<5-> type checked
+%% \item<6-> can be annotated with simplifier phase numbers
+%% \item<7-> some issues:
+%%   \begin{itemize}
+%%     \item may not terminate
+%%     \item overlapping RULES causes GHC to pick one arbitrarily
+%%     \item limitations on the rewrites that can be expressed
+%%   \end{itemize}
+%% \item<8-> HERMIT allows GHC RULES to be applied interactively and specifically
+%% \end{itemize}
+
+\end{frame}

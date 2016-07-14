@@ -1,0 +1,99 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{beamer}
+
+\usepackage{beamerthemesplit}
+
+\usepackage{etex}
+\usepackage{amsmath,amsfonts}
+\usepackage[all]{xy}
+\usepackage{fancyvrb}
+\usepackage{multirow}
+
+
+%\usetheme{Frankfurt}
+\usetheme{Madrid}
+\useinnertheme[shadow]{rounded} 
+
+%% \usefonttheme[onlylarge]{serif} %structuresmallcapsserif
+
+%%% HERMIT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{hermitsize}{\footnotesize}{}
+
+%%% including hermit code %%%
+\newlength{\hermitspace}
+\setlength{\hermitspace}{0.4em}  % how wide a space is
+\definecolor{hermit:keyword}{rgb}{0,0,0.7}
+\definecolor{hermit:syntax}{rgb}{0.7,0,0}
+\definecolor{hermit:type}{rgb}{0,0.7,0} % 0,0,1}
+
+%
+% We need to fix to be the same font as the others.
+%
+\newcommand{\hermitprompt}[1]{
+\vspace{1ex}
+
+{\tt\noindent{\color{hermit:syntax}hermit> }#1}
+\vspace{-1ex}
+}
+
+\newcommand{\inputhermit}[1]{
+\VerbatimInput[commandchars=\\\{\},fontfamily=tt,fontsize=\footnotesize]{#1}
+}
+
+%%% lhs2tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{codesize}{\footnotesize}{}
+
+%include polycode.fmt
+%include greek.fmt
+%include hermit.fmt
+%include spacing.fmt
+
+%% Turn of indentation of code blocks
+%% \setlength{\mathindent}{0mm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\newenvironment{codeblock}[1]{\begin{block}{#1}\vspace{-3mm}}{\vspace{-6mm}\end{block}}
+%\newenvironment{egcodeblock}[1]{\begin{exampleblock}{#1}\vspace{-3mm}}{\vspace{-6mm}\end{exampleblock}}
+
+%\setlength{\mathindent}{3mm}
+
+\setbeamersize{text margin left=4mm}
+\setbeamersize{text margin right=3mm}
+
+\setbeamertemplate{footline}[page number]
+\logo{\includegraphics[width=1cm]{KUlogo1C}}
+
+\newenvironment{codeblock}[1][.8]{%
+\begin{columns}
+\begin{column}{#1\linewidth}
+\begin{exampleblock}{}}{%
+\end{exampleblock}
+\end{column}
+\end{columns}} 
+
+\newenvironment{execblock}[1][.8]{%
+\begin{columns}
+\begin{column}{#1\linewidth}
+\begin{block}{}}{%
+\end{block}
+\end{column}
+\end{columns}} 
+
+\newenvironment{codeblock*}[2][.8]{%
+\begin{columns}
+\begin{column}{#1\linewidth}
+\begin{exampleblock}{#2}}{%
+\end{exampleblock}
+\end{column}
+\end{columns}} 
+
+
+\def\slideskip{\vskip 0.1in}
+\def\frameskip{\vskip 0.1in}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,24 @@
+\begin{frame}
+\frametitle{What did we do?}
+
+HERMIT requires a recent ghc (I am using GHC 7.8.3)
+
+\vspace{2em}
+
+\begin{enumerate}
+\item \verb|cabal update|
+\item \verb|cabal install hermit|
+\item \verb|hermit Main.hs|
+\end{enumerate}
+
+\vspace{2em}
+
+The \alert{\verb|hermit|} command just invokes GHC with some default flags:\\[1ex]
+
+{\color{hermit:syntax}{\tt\%}}\verb| hermit Main.hs|
+
+\verb|ghc Main.hs -fforce-recomp -O2 -dcore-lint|
+\verb|            -fexpose-all-unfoldings|
+\verb|            -fsimple-list-literals -fplugin=HERMIT|
+\verb|            -fplugin-opt=HERMIT:main:Main:|
+\end{frame}

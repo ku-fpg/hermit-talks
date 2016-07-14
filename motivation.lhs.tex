@@ -1,0 +1,36 @@
+\section{Motivation}
+
+\begin{frame}
+\frametitle{Remote Shell for our Haskell compiler?}
+
+\begin{itemize}
+\item
+There is often a trade-off between the \alert{clarity} and \alert{efficiency} of a program.
+
+\item
+Useful to \alert{transform} a clear program (specification) into an efficient program (implementation). 
+
+\item 
+This idiom has many instantiations: 
+ faster code; 
+ using a different interface; 
+ space usage;
+ semi-formal verification.
+
+\item
+We want to \alert{mechanise} such transformations on Haskell programs:
+  \begin{itemize}
+     \item less time-consuming and error prone than pen-and-paper reasoning
+     \item no need to modify the source file
+  \end{itemize}
+
+\item
+Several existing transformation systems for Haskell programs, e.g. HaRe, HERA, PATH, Ultra.
+They all operate on Haskell source code.
+
+\item 
+{\bf We take a different approach, and provide commands to transforming \alert{GHC Core}, GHC's intermediate language.}
+
+\end{itemize}
+
+\end{frame}
